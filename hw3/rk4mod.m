@@ -1,4 +1,4 @@
-function xout = rk4(x,t,tau,derivsRK,param,theta)
+function xout = rk4mod(x,t,tau,derivsRK,param,theta)
 %  Runge-Kutta integrator (4th order)
 % Input arguments -
 %   x = current value of dependent variable
@@ -16,7 +16,7 @@ function xout = rk4(x,t,tau,derivsRK,param,theta)
 %t = time;
 %***derivsRK = gravrk which takes inputs state, time and GM***
 GM = param;
-gmp = (GM*.01)*cos(theta) +GM;
+gmp = ((GM*.01)*cos(theta) + GM);
 half_tau = 0.5*tau;
 F1 = feval(derivsRK,x,t,gmp);  
 t_half = t + half_tau;

@@ -1,0 +1,18 @@
+
+%x1 = dxdt = y;
+%x2 = dydt = -x1 + (1-x1^2)*x1;
+t0 = 1; % input('Enter initial radial distance (AU): ');  
+y0 = 1; %input('Enter initial tangential velocity (AU/yr): ');
+t = [t0 0];  y = [0 y0];
+time = 0;
+tau = .001;
+state = [ t(1) t(2) y(1) y(2) ];
+
+for iStep=1:nStep  
+  tplot(iStep) = time;
+  state = rk4(state,time,tau,'ode45',GM);
+  t = [state(1) state(2)]; 
+  y = [state(3) state(4)];
+  time = time + tau;   
+end
+

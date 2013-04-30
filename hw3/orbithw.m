@@ -1,4 +1,4 @@
-%% modify the orbit program to to compute and plot the absolute fractional error in r(theta)
+4%% modify the orbit program to to compute and plot the absolute fractional error in r(theta)
 %% versus time.
 
 % orbit - Program to compute the orbit of a comet.

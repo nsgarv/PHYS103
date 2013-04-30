@@ -23,7 +23,6 @@ tau = .005; %input('Enter time step (yr): ');
 NumericalMethod = 3; % menu('Choose a numerical method:', ...
        %'Euler','Euler-Cromer','Runge-Kutta','Adaptive R-K');
 for iStep=1:nStep  
-
   %* Record position and energy for plotting.
   rplot(iStep) = norm(r);           % Record position for polar plot
   thplot(iStep) = atan2(r(2),r(1));
@@ -32,10 +31,12 @@ for iStep=1:nStep
   potential(iStep) = - GM*mass/norm(r);
   %* Calculate new position and velocity using desired method.   
   if( NumericalMethod == 3 )
-    state = rk4mod(state,time,tau,'gravrk',GM,thplot(iStep));
+    state = rk4mod(state,time,tau,'gravrkmod',GM,thplot(iStep));
     r = [state(1) state(2)];   % 4th order Runge-Kutta
     v = [state(3) state(4)];
     time = time + tau;   
+    theta = acos(dot(v,r)./(norm(r)*norm(v)));
+    L(iStep) = norm(r)*norm(v)*sin(theta);
   end
 end
 
@@ -45,9 +46,12 @@ polar(thplot,rplot, '-');  % Use polar plot for graphing orbit
 xlabel('Distance (AU)');  grid;
 pause(1)   % Pause for 1 second before drawing next plot
 
+figure(2)
+semilogy(tplot,L);
+
 %* Graph the energy of the comet versus time.
-figure(2); clf;   % Clear figure 2 window and bring forward
-totalE = kinetic + potential;   % Total energy
-plot(tplot,kinetic,'-.',tplot,potential,'--',tplot,totalE,'-')
-legend('Kinetic','Potential','Total');
-xlabel('Time (yr)'); ylabel('Energy (M AU^2/yr^2)');
+%figure(2); clf;   % Clear figure 2 window and bring forward
+%totalE = kinetic + potential;   % Total energy
+%plot(tplot,kinetic,'-.',tplot,potential,'--',tplot,totalE,'-')
+%legend('Kinetic','Potential','Total');
+%xlabel('Time (yr)'); ylabel('Energy (M AU^2/yr^2)');
