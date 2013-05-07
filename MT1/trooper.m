@@ -44,6 +44,7 @@ for istep=1:maxstep
   %* Calculate the new position and velocity using Euler method
   h = h - tau*v;                 % Euler step
   v = v + tau*accel;     
+  vfree = tn(istep)*grav;
   %* If trooper reaches ground (h<0), break out of the loop
   if( h < 0 )  
      % Record last values computed
@@ -64,11 +65,14 @@ tactual = intrpf(Y0,Y,X);
 fprintf('Time of flight estimted is %g seconds\n', time);
 fprintf('Time of flight interpolated is %g seconds\n', tactual);
 fprintf('Parachute impact velocity is %g m/s\n', v);
+fprintf('Freefall impact velocity is %g\n', vfree);
 
-%disp('corrected parachute flighttime is %d', timel);
+
 index = length(timev);
-plot(timev,hplot(1:index),'-b',5,hplot(1:index),'-r',timev(1:tstop),yNoAir(1:tstop),'-b');
-%legend('Euler method','Theory (No air)  ');
+plot(timev,hplot(1:index),'-r',5,hplot(1:index),'-g',timev(1:tstop),yNoAir(1:tstop),'-b');
 xlabel('Time (s)');  ylabel('Height (m)');
 title('paratrooper parachute vs freefall');
+text(11.8,250,'parachute');
+text(6.5,150, 'freefall (no air)');
+text(5.2,500,'parachute opens at t=5s');
 
