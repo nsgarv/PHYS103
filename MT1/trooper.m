@@ -1,4 +1,4 @@
-% balle - Program to compute the trajectory of a baseball
+% balle - heavily modified
 %         using the Euler method.
 clear;  help balle;  % Clear memory and print header
 

@@ -9,15 +9,9 @@ function deriv = gravmod(s,t,param)
 %* Compute acceleration
 r = [s(1) s(2)];  % Unravel the vector s into position and velocity
 v = [s(3) s(4)];
-%accel = -GM*r/norm(r)^3;  % Gravitational 
 %new gravitational for problem 14
 accel = -(param(1)*r/norm(r)^3) - param(2)*norm(v)*v;
 %%%norm for any vector r (rx,ry). norm gives the magnitude sqrt(rx^2+ry^2)
-
-
 %* Return derivatives [dr(1)/dt dr(2)/dt dv(1)/dt dv(2)/dt]
 deriv = [v(1) v(2) accel(1) accel(2)];
 return;
-
-
-%%%output of this function is f

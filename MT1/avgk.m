@@ -1,19 +1,17 @@
-function kinetplot = avgk(thplot,kinetic)
+function kinetplot = avgk(theta,kinetic)
 
-a = length(thplot);
-t = abs(thplot);
-
+a = length(theta);
+val = zeros(20,1);
 n=1;
-istep = 1;
-while (istep < a)
-	if(t(istep) < .23)
-		val(n) = istep;
+for(istep=1:a)
+	if(theta > 6)
+		val(n) = istep
+		pause(.25);
 		n = n+1;  
-		istep = istep + 1;
 	end
 end
 
 
 
-%kinetplot = [];
+kinetplot = val;
 return;

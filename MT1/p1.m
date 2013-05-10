@@ -1,11 +1,5 @@
 % orbit - Program to compute the orbit of a comet.
 clear all;  help orbit;  % Clear memory and print header
-
-%Fd = -C|v|v
-% Fg(r1) = 100|Fd(v1)|
-
-
-
 %* Set initial position and velocity of the comet.
 r0 = 1; %input('Enter initial radial distance (AU): ');  
 v0 = 2*pi; %input('Enter initial tangential velocity (AU/yr): ');
@@ -21,8 +15,6 @@ time = 0;
 
 Cd = GM/(100*norm(v)*v0);
 param = [GM Cd];
-%* Loop over desired number of steps using specified
-%  numerical method.
 nStep = 200; %input('Enter number of steps: ');
 tau = .02; %input('Enter time step (yr): '); 
 for iStep=1:nStep  
@@ -37,17 +29,44 @@ for iStep=1:nStep
     [state time tau] = rka(state,time,tau,adaptErr,'gravmod',param);
     r = [state(1) state(2)];   % Adaptive Runge-Kutta
     v = [state(3) state(4)];
-
-    %Fd = -Cd*norm(v)*v;
 end
-%if 0
-      kinetplot = avgk(thplot,kinetic)
 
-%plot(kinetplot(1),kinetplot(2))
-%end;
-%%%
-%plot mean kinetic energy per revolution
-%%%
+a = abs(thplot);
+l = length(thplot);
+for jstep=1:l
+  if (thplot(jstep) <= 0)
+    theta(jstep) = (thplot(jstep) + 2*pi);
+  else
+    theta(jstep) = thplot(jstep);
+  end
+end
+
+theta;
+n=1;
+for(kstep=1:length(theta))
+  if(theta(kstep) > 6)
+    thetaindex(n) = kstep;
+    n = n+1;
+  end
+end
+g = 1;
+fstep = 1;
+hi = 0;
+gstep = 1;
+
+while(fstep < length(thetaindex))
+  hi = thetaindex(fstep + 1);
+  lo = thetaindex(fstep);
+  avgk(gstep) = sum(kinetic(lo):kinetic(hi))/(hi-lo);
+  gstep = gstep +1;
+    fstep = fstep +1;
+end
+indexthetaindex = [1:(length(thetaindex)-1)];
+figure(3)
+plot(indexthetaindex,avgk, '+');
+ylabel('average kinetic energy per revolution');
+xlabel('revolution number');
+title('Kinetic energy per revolution');
 
 %* Graph the trajectory of the comet.
 figure(1); clf;  % Clear figure 1 window and bring forward
