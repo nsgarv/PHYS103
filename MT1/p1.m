@@ -40,6 +40,11 @@ for iStep=1:nStep
 
     %Fd = -Cd*norm(v)*v;
 end
+%if 0
+      kinetplot = avgk(thplot,kinetic)
+
+%plot(kinetplot(1),kinetplot(2))
+%end;
 %%%
 %plot mean kinetic energy per revolution
 %%%
