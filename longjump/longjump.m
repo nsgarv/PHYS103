@@ -114,6 +114,15 @@ clear v;
 
 %%% distance of 8.9 meters and rho_hialt, what is initial velocity?
 %function [y1,...,yN] = myfun(x1,...,xM)
-function [rangedif] = diff(nhxdistance, initialv) 
+%beamonh
+clear('all');
+rho_SL=1.29;
+rho_HA=0.94;
+speed = 10;
+[range_SL,xplot_SL,yplot_SL]=fbeamon(speed,rho_SL);
+[range_HA,xplot_HA,yplot_HA]=fbeamon(speed,rho_HA);
+speedB=fzero(iline('fbeamon(speed,rho)-8.9','speed','rho'),speed,[],rho_HA);
+[rangeB_SL,xplotB_SL,yplotB_SL]=fbeamon(speedB,rho_SL);
+[rangeB_SL,xplotB_HA,yplotB_HA]=fbeamon(speedB,rho_HA);
 
 

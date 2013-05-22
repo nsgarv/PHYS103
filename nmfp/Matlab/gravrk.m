@@ -10,7 +10,7 @@ function deriv = gravrk(s,t,GM)
 %* Compute acceleration
 r = [s(1) s(2)];  % Unravel the vector s into position and velocity
 v = [s(3) s(4)];
-accel = -GM*r/norm(r)^3;  % Gravitational 
+accel = -GM*r/norm(r)^3 + ;  % Gravitational 
 %%%norm for any vector r (rx,ry). norm gives the magnitude sqrt(rx^2+ry^2)
 
 

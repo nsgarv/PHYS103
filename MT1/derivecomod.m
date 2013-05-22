@@ -12,7 +12,7 @@ k = 1000;
 
 %set up differential equations 
 
-deriv(1) = (a * (1 - x/k) - c * x * y);
+deriv(1) = (a * (1 - x/k) * x - c * x * y);
 %pause(.25)
 deriv(2) = (-b * y + d * x * y);
 %pause(.25)
