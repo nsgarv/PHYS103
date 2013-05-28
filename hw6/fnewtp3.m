@@ -1,18 +1,17 @@
-function [f,D] = fnewtp3(x)
-%  Function used by the N-variable Newton's method
+function [f df] = fnewtp3(param, E)
+%  Function used by the single variable Newton's method
 %  Inputs
-%    x     State vector [x y]
+%    param(1)=e  parameters eccentricity and mean anomoly
+%    param(2)=M
+%      E    Eccentric anomoly
 %  Outputs
-%    f     Lorenz model r.h.s. [dx/dt dy/dt]
-%    D     Jacobian matrix, D(i,j) = df(j)/dx(i)
+%    f     
+%    D     first derivative of Eccentric anomoly equation
 
-% Evaluate f(i)
-f(1) = x(1)^2+x(1)*x(2)-10;
-f(2) = x(2)+3*x(1)*x(2)^2-57;
+% Evaluate f(E)
+%M - E + e * sin(E)
+f = param(2) - E + param(1) * sin(E);
 
-% Evaluate D(i,j)
-D(1,1) = 2*x(1)+x(2);   % df(1)/dx(1)
-D(1,2) = 3*x(2)^2;      % df(2)/dx(1)
-D(2,1) = x(1);          % df(1)/dx(2)
-D(2,2) = 1+6*x(1)*x(2); % df(2)/dx(2)
+% Evaluate f'(E)
+df = param(1) * cos(E) - 1;
 return;
