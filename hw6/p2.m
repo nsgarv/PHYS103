@@ -8,20 +8,20 @@ end
 clear all
 
 k = input('k2 is function of k1. Input spring constant k=[k1 k2]: ');
-j=logspace(1/1000,1000);
+j=logspace(1/1000,1000,50);
 
 for (h = 1:length(j))
 	%k2 goes from k1/1000 to 1000*k1;
 	k(2) = j(h)*k(1);
 
-	L= 1 %input('Enter rest lengths L=[L1 L2 L3 L4]: ');
+	L = 1 %input('Enter rest lengths L=[L1 L2 L3 L4]: ');
 	%kk=[-k(1)-k(2) k(2) 0;k(2) -k(2)-k(3) k(3);0 k(3) -k(3)-k(4)];
 	%b=[-k(1)*L(1)+k(2)*L(2) -k(2)*L(2)+k(3)*L(3) -k(3)*L(3)+k(4)*(L(4)-Lw)]';
 
-	kk = [k(1) k(2) 0 0; -2*k(1)-k(2) k(1) k(2) 0; k(1) -2*k(1) k(1) 0; k(2) k(1) -k(1)-k(2) 0];
-	b = [k(1)+k(2); k(2); -k(2); -k(1)-k(2)];
-	x(h)=kk\b; %same as x=inv(kk)*b
-	length(h) = sum(x(h));
+	kk = [-2*k(1)-k(2) , k(1) , k(2); k(1) , -2*k(1) , k(1); k(2) , k(1) , -k(1)-k(2)];
+	b = [k(2); -k(2); -k(1)-k(2)];
+	x=kk\b; %same as x=inv(kk)*b
+	length(h) = sum(x);
 	yplot(h) = k(1)/k(2);
 	%disp('Positions of the masses are ');
 	%disp(x');

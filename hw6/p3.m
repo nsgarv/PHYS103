@@ -9,15 +9,17 @@
 % newtn - Program to solve nonlinear kepler equation
 % using Newton's method.  Equations defined by function fnewtp3.m
 clear all;  help p3;  % Clear memory and print header
-ecc = [.1 .2 .3 .4 .5 .6 .7 .8 .9];
+ecc = [.1 .2 .3 .4 .5 .55 .675 .725];
+%ecc = [.1 .2 .3 .4 .5 .6 .7 .8 .9];
+%ecc = [.9]
 
-for z=1:9
+for z=1:length(ecc)
 x0 = 1;%input('Enter the initial guess (row vector): ');
 %* Set initial guess and parameters
 count = 50;
 for (iteration=1:count)
 
-	M = linspace(0,2*pi,50);
+	M = linspace(0,2*pi,count);
 	e = ecc(z);
 	param = zeros(1,2);
 	param = [e M(iteration)];
@@ -40,12 +42,16 @@ for (iteration=1:count)
 	end
 
 end
-figure(z);
-plot(M,E,'-');
+
+plot(M,E,'b-');
+hold on;
 title('Eccentric anomoly vs Mean anomoly');
 xlabel('Mean anomoly M');
 ylabel('Eccentric anomoly E(M)');
+pause(.4);
+
 end
+
 
 %%%%%%%%%%%%
 count = 50;
