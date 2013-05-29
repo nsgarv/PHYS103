@@ -14,5 +14,7 @@ for M=1:5
 	plot(x,(yy),'b-o',x,y,'r-+');
 	hold on;
 end
+if 0
 figure(2);
 plot((x+1),yinterp,'--g');
+end
