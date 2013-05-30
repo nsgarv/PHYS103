@@ -9,25 +9,30 @@
 % newtn - Program to solve nonlinear kepler equation
 % using Newton's method.  Equations defined by function fnewtp3.m
 clear all;  help p3;  % Clear memory and print header
-ecc = [.1 .2 .3 .4 .5 .55 .675 .725];
-%ecc = [.1 .2 .3 .4 .5 .6 .7 .8 .9];
-%ecc = [.9]
+%ecc = [.1 .2 .3 .4 .5 .55 .675 .725];
+ecc = [.1 .2 .3 .4 .5 .6 .7 .8 .9];
+%ecc = [.9];
 
 for z=1:length(ecc)
-x0 = 1;%input('Enter the initial guess (row vector): ');
+x0 = 0;%input('Enter the initial guess (row vector): ');
 %* Set initial guess and parameters
 count = 50;
-for (iteration=1:count)
+for (mcurr=1:count)
 
 	M = linspace(0,2*pi,count);
 	e = ecc(z);
 	param = zeros(1,2);
-	param = [e M(iteration)];
-	x = x0;  % Copy initial guess
+	param = [e M(mcurr)];
+
+	if (mcurr >1)
+		x = E(mcurr-1);
+	else 
+		x = x0;
+	end % Initial guess
 	%xp(:,1) = x(:); % Record initial guess for plotting
 
 	%* Loop over desired number of steps 
-	nStep = 10;   % Number of iterations before stopping
+	nStep = 50;   % Number of iterations before stopping
 	for (iStep=1:nStep)
 	
   		%* Evaluate function f and its first derivative df
@@ -37,7 +42,7 @@ for (iteration=1:count)
   		%* Update the estimate for the root  
   		x = x - f/dx;              % Newton iteration for new x
   		%xp(:,iStep+1) = x(:); % Save current estimate for plotting
-  		E(iteration) = x;
+  		E(mcurr) = x;
     
 	end
 

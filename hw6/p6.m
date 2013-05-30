@@ -16,9 +16,10 @@ sigmam = .16*ones(1,length(M));
 mm = (yym(length(M))-yym(1))/(xm(length(M))-xm(1));
 ymten = .1*(yym(1)) + yym(1); %value of y at 10% or initial 
 xmten = (ymten - yym(1))/mm; %x value at the co2 emission 10% value
-fprintf('The rate of CO2 increase in Mauna Loa is %f ppm per year\n', (178/7)*mm);
+fprintf('The rate of CO2 increase in Mauna Loa is %f ppm per year\n', mm*(365/14));
 tenmyr = ceil((xmten*14)/365);
 fprintf('In %g years the CO2 level will be %%10 greater in Mauna Loa\n', tenmyr);
+
 
 xb = 1:length(B);
 sigmab = .27*ones(1,length(B));
@@ -26,11 +27,11 @@ sigmab = .27*ones(1,length(B));
 mb = (yyb(length(B))-yym(1))/(xb(length(B))-xb(1));
 ybten = .1*(yyb(1)) + yyb(1); %value of y at 10% or initial 
 xbten = (ybten - yyb(1))/mb; %x value at the co2 emission 10% value
-fprintf('The rate of CO2 increase in Barrow is %f ppm per year\n', (178/7)*mb);
+fprintf('The rate of CO2 increase in Barrow is %f ppm per year\n', (356/14)*mb);
 tenbyr = ceil((xbten*14)/365);
 fprintf('In %g years the CO2 level will be %%10 greater in Barrow\n', tenbyr);
 
-if 0
+
 figure(1);
 plot(xm,M,':',xm,yym,'r-');
 title('CO2 emission in Mauna Loa, Hi');
@@ -54,4 +55,4 @@ plot(xb,B,':',xb,yyb,'r-',xbten,ybten,'b+');
 title('CO2 emission in Barrow, Ak with %10 emission projection');
 xlabel('Day of recorded level since 1981');
 ylabel('CO2 im air (ppm)');
-end
+

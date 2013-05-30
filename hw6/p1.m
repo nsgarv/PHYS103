@@ -55,7 +55,7 @@ grid;
 % = input('Plot data from lorenz program? (1=Yes/0=No): ');
 %if( flag == 1 )
 hold on
-nStep = 50;
+nStep = 500;
 %tau = 500; 
 err = .01;
 state=x0;
