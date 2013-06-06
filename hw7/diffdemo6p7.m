@@ -3,13 +3,13 @@
 clear all;  help advect;  % Clear memory and print header
 
 %* Select numerical parameters (time step, grid spacing, etc.).
-N = 61; %input('Enter number of grid points: ');
+N = 61; % number of grid points
 L = 1.;     % System size
 h = L/N;    % Grid spacing
 kappa = 1.; % kappa
-tau = 1e-4; %input('Enter time step: ');
-coeff = -kappa*tau/(2.*h);  % Coefficient used by all schemes
-nStep = 1000; %input('Enter number of steps: ');
+tau = 1e-4; % time step
+coeff = -kappa*tau/(2.*h);  % Coefficient
+nStep = 1000; % number of steps
 tt = linspace(1e-4,.03, nStep);
 
 %* Set initial and boundary conditions.
@@ -17,7 +17,7 @@ tt = linspace(1e-4,.03, nStep);
 sigma = sqrt(2*kappa.*tt);              % Width of the Gaussian pulse
 x = ((1:N)-1/2)*h - L/2;  % Coordinates of grid points
 % Initial condition is a Gaussian-cosine pulse
-a = (ones(length(x),1)*(1./sigma)).*exp(-(x'-L/4).^2*(1./sigma.^2)/2)/sqrt(2*pi); 
+a = (ones(length(x),1)*(1./sigma)).*exp(-(x'-L/4).^2*(1./sigma.^2)/2)/sqrt(2*pi);
 % Use periodic boundary conditions
 ip(1:(N-1)) = 2:N;  ip(N) = 1;   % ip = i+1 with periodic b.c.
 im(2:N) = 1:(N-1);  im(1) = N;   % im = i-1 with periodic b.c.
@@ -25,15 +25,18 @@ im(2:N) = 1:(N-1);  im(1) = N;   % im = i-1 with periodic b.c.
 %* Initialize plotting variables.
 iplot = 1;          % Plot counter
 aplot(:,1) = a(:);  % Record the initial state
-tplot(1) = 0;       % Record the initial time (t=0)
+%tplot(1) = 0;       % Record the initial time (t=0)
+tplot = tt;
 nplots = 1000;        % Desired number of plots
 plotStep = nStep/nplots; % Number of steps between plots
 
 %* Loop over desired number of steps.
+k = 1;
 for iStep=1:nStep  %% MAIN LOOP %%
+	k = k+1;
   %* Compute new values of wave amplitude using FTCS, 
    %%% FTCS method %%%
-    a(1:N) = a(1:N) + coeff*(a(ip)-a(im));  
+    a(1:k) = a(1:k) + coeff*(a(ip)-a(im));  
   end   
 
   %* Periodically record a(t) for plotting.

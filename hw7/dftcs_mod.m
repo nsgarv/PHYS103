@@ -3,12 +3,12 @@
 clear; help dftcs;  % Clear memory and print header
 
 %* Initialize parameters (time step, grid spacing, etc.).
-tau = input('Enter time step: ');
-N = input('Enter the number of grid points: ');
+tau = 1e-4; %input('Enter time step: ');
+N = 61; %input('Enter the number of grid points: ');
 L = 1.;  % The system extends from x=-L/2 to x=L/2
 h = L/(N-2);  % Grid size
 kappa = 1.;   % Diffusion coefficient
-coeff = kappa*tau/h^2;
+coeff = kappa*tau/(h^2);
 if( coeff < 0.5 )
   disp('Solution is expected to be stable');
 else
