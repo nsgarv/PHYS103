@@ -31,11 +31,13 @@ plot_step = nstep/nplots;  % Number of time steps between plots
 for istep=1:nstep  %% MAIN LOOP %%
 
   %* Compute new temperature using FTCS scheme.
-  tt(2:(N-1)) = tt(2:(N-1)) + ...
+  tt_new(2:(N-1)) = tt(2:(N-1)) + ...
       coeff*(tt(3:N) + tt(1:(N-2)) - 2*tt(2:(N-1)));
 
-  tt(1) = tt(N-1);
-  tt(2) = tt(N);
+      tt_new(1) = tt_new(N-1);
+      tt_new(N) = tt_new(2);
+
+      tt = tt_new;
   
   %* Periodically record temperature for plotting.
   if( rem(istep,plot_step) < 1 )   % Every plot_step steps
@@ -58,6 +60,6 @@ cs = contour(tplot,xplot,ttplot,contourLevels);  % Contour plot
 clabel(cs,contourLabels);  % Add labels to selected contour levels
 xlabel('Time'); ylabel('x');
 title('Temperature contour plot');
-
+figure(3);
 plot(xplot, ttplot(:,round(N/2)));
 title('T(x,t=.015');

@@ -5,7 +5,7 @@
 %            %
 %%%%%%%%%%%%%%
 
-%if 0
+if 0
 % 1D diffusion equation
 kappa=1;
 L=1;
@@ -92,14 +92,14 @@ plot(xplot, ttplot(:,round(N/2)));
 title('T(x,t=.015');
 
 
-%end
+end
 
 %%%%%%%%%%%%%%
 %            %
 %%% Part B %%%
 %            %
 %%%%%%%%%%%%%% 
-if 0
+
 
 % 1D diffusion equation
 % analytical solution
@@ -118,9 +118,9 @@ Timag(:,:,1)=(ones(length(x),1)*(1./sig)).*exp(-(x'-L/4).^2*(1./sig.^2)/2)/sqrt(
 %(ones(length(x),1)*(1./sig)) is a matrix of size (x,t)
 for ii=1:nimag                                                               
 	Timag(:,:,ii+1)=Timag(:,:,ii)+(ones(length(x),1)*(1./sig))...
-	.*exp(-(x+(tan((ii*pi)/2)+cos((ii*pi)/2))*(L*(2*ii-1)/4))'.^2*((1./sig.^2)/2))...
+	.*exp(-(x+(tan((ii*pi)/2)+cot((ii*pi)/2))*(L*(2*ii-1)/4))'.^2*((1./sig.^2)/2))...
 		/sqrt(2*pi)+(ones(length(x),1)*(1./sig))...
-	.*exp(-(x-(tan((ii*pi)/2)+cos((ii*pi)/2))*(L*(2*ii-1)/4))'.^2*((1./sig.^2)/2))...
+	.*exp(-(x-(tan((ii*pi)/2)+cot((ii*pi)/2))*(L*(2*ii-1)/4))'.^2*((1./sig.^2)/2))...
 		/sqrt(2*pi);
 end
 figure(1)
@@ -190,5 +190,5 @@ title('Temperature contour plot');
 
 plot(xplot, ttplot(:,round(N/2)));
 title('T(x,t=.015');
-end
+
 
