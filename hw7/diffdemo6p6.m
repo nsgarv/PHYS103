@@ -1,6 +1,11 @@
 
+%%%%%%%%%%%%%%
+%            %
 %%% Part A %%%
-%if 0
+%            %
+%%%%%%%%%%%%%%
+
+if 0
 % 1D diffusion equation
 kappa=1;
 L=1;
@@ -20,7 +25,7 @@ for ii=1:nimag
 	.*exp(-(x+(ii*L/2))'.^2*((1./sig.^2)/2))/sqrt(2*pi)+(-1)^ii*(ones(length(x),1)*(1./sig))...
 	.*exp(-(x-(ii*L/2))'.^2*((1./sig.^2)/2))/sqrt(2*pi);
 end
-%figure(1)
+figure(1)
 mesh(t,x,Timag(:,:,nimag));
 title('part a');
 
@@ -59,6 +64,8 @@ for istep=1:nstep  %% MAIN LOOP %%
   %* Compute new temperature using FTCS scheme.
   tt(2:(N-1)) = tt(2:(N-1)) + ...
       coeff*(tt(3:N) + tt(1:(N-2)) - 2*tt(2:(N-1)));
+      tt(1) = tt(2);
+      tt(N) = tt(N-1);
   
   %* Periodically record temperature for plotting.
   if( rem(istep,plot_step) < 1 )   % Every plot_step steps
@@ -69,12 +76,12 @@ for istep=1:nstep  %% MAIN LOOP %%
 end
 
 %* Plot temperature versus x and t as wire-mesh and contour plots.
-figure(1); clf;
+figure(2); clf;
 mesh(tplot,xplot,ttplot);  % Wire-mesh surface plot
 xlabel('Time');  ylabel('x');  zlabel('T(x,t)');
 title('Diffusion of a delta spike');
 pause(1);
-figure(2); clf;       
+figure(3); clf;       
 contourLevels = 0:0.5:10;  contourLabels = 0:5;     
 cs = contour(tplot,xplot,ttplot,contourLevels);  % Contour plot
 clabel(cs,contourLabels);  % Add labels to selected contour levels
@@ -84,10 +91,15 @@ title('Temperature contour plot');
 %plot(xplot, ttplot(:,round(N/2)))
 
 
-%end
+end
 
-if 0
+%%%%%%%%%%%%%%
+%            %
 %%% Part B %%%
+%            %
+%%%%%%%%%%%%%% 
+%if 0
+
 % 1D diffusion equation
 % analytical solution
 kappa=1;
@@ -150,6 +162,8 @@ for istep=1:nstep  %% MAIN LOOP %%
   %* Compute new temperature using FTCS scheme.
   tt(2:(N-1)) = tt(2:(N-1)) + ...
       coeff*(tt(3:N) + tt(1:(N-2)) - 2*tt(2:(N-1)));
+      tt(1) = tt(2);
+      tt(N) = tt(N-1);
   
   %* Periodically record temperature for plotting.
   if( rem(istep,plot_step) < 1 )   % Every plot_step steps
@@ -173,6 +187,6 @@ xlabel('Time'); ylabel('x');
 title('Temperature contour plot');
 
 
-plot(xplot, ttplot(:,round(N/2)))
-end
+%plot(xplot, ttplot(:,150))
+%end
 
