@@ -1,11 +1,11 @@
-
+%%%%%%%%%%%%%%Problem 6.6%%%%%%%%%%
 %%%%%%%%%%%%%%
 %            %
 %%% Part A %%%
 %            %
 %%%%%%%%%%%%%%
 
-if 0
+%if 0
 % 1D diffusion equation
 kappa=1;
 L=1;
@@ -88,17 +88,18 @@ clabel(cs,contourLabels);  % Add labels to selected contour levels
 xlabel('Time'); ylabel('x');
 title('Temperature contour plot');
 
-%plot(xplot, ttplot(:,round(N/2)))
+plot(xplot, ttplot(:,round(N/2)));
+title('T(x,t=.015');
 
 
-end
+%end
 
 %%%%%%%%%%%%%%
 %            %
 %%% Part B %%%
 %            %
 %%%%%%%%%%%%%% 
-%if 0
+if 0
 
 % 1D diffusion equation
 % analytical solution
@@ -187,6 +188,7 @@ xlabel('Time'); ylabel('x');
 title('Temperature contour plot');
 
 
-%plot(xplot, ttplot(:,150))
-%end
+plot(xplot, ttplot(:,round(N/2)));
+title('T(x,t=.015');
+end
 

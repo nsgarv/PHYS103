@@ -45,7 +45,7 @@ for istep=1:nstep  %% MAIN LOOP %%
   end
 end
 
-tt(:,N/2)
+%tt(:,round(N/2)
 %* Plot temperature versus x and t as wire-mesh and contour plots.
 figure(1); clf;
 mesh(tplot,xplot,ttplot);  % Wire-mesh surface plot
@@ -58,3 +58,6 @@ cs = contour(tplot,xplot,ttplot,contourLevels);  % Contour plot
 clabel(cs,contourLabels);  % Add labels to selected contour levels
 xlabel('Time'); ylabel('x');
 title('Temperature contour plot');
+
+plot(xplot, ttplot(:,round(N/2)));
+title('T(x,t=.015');
