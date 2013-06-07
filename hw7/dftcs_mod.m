@@ -17,11 +17,11 @@ end
 
 %* Set initial and boundary conditions.
 tt = zeros(N,1);          % Initialize temperature to zero at all points
-tt(round(N/2)) = 1/h;     % Initial cond. is delta function in center
+tt(round(3*N/4)) = 1/h;     % Initial cond. is delta function in center
 %% The boundary conditions are tt(1) = tt(N) = 0
 
 %* Set up loop and plot variables.
-xplot = (0:N-1)*h - L/2;   % Record the x scale for plots
+xplot = (0:N-1)*h -h/2 - L/2;   % Record the x scale for plots
 iplot = 1;                 % Counter used to count plots
 nstep = 300;               % Maximum number of iterations
 nplots = 50;               % Number of snapshots (plots) to take
@@ -31,6 +31,8 @@ plot_step = nstep/nplots;  % Number of time steps between plots
 for istep=1:nstep  %% MAIN LOOP %%
 
   %* Compute new temperature using FTCS scheme.
+  tt(1) = tt(N-1);
+  tt(2) = tt(N);
   tt(2:(N-1)) = tt(2:(N-1)) + ...
       coeff*(tt(3:N) + tt(1:(N-2)) - 2*tt(2:(N-1)));
   
