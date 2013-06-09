@@ -28,8 +28,8 @@ for i=1:istep
 	
 end 
 
-plot(rt,ig)
+plot(rt,ig);
 ylabel('Current i (amps)');
-xlabel('Variable resistor Rt \Omega');
+xlabel('Resistance resistor Rt \Omega');
 title('current through power supply as a function of resistor Rt');
 
