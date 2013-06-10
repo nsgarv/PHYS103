@@ -9,26 +9,32 @@ r2 = 10;
 r3 = 2;
 r4 = 9;
 vg = 24;
-rt = linspace(0,100,1000);
-istep = length(rt);
+rv = linspace(0,100,100);
+istep = length(rv);
 
 
 for i=1:istep
+
+	rt = rv(i);
 	%% solved with equivelant resistance %%
-	req1 = ((2*r4*rt(i))/((2*r4)+rt(i)));
+	%if 0
+	req1 = ((2*r4*rt)/((2*r4)+rt));
 	req2 = req1 + r3;
 	req3 = req2*r2/(req2 + r2);
 	rtot = req3 + 2*r1;
+	%end 
 
 	%% Matrix equations %%
-	%A = [(1/r1+1/r2+1/r3) -1/r3 -1/r2; 1/r3 (1/r3+1/rt(i)+1/(2*r4)) (-1/rt(i)-1/(2*r4)); 1/r1 0 1/r1];
-	%b = [-vg*1/r1; 0; -vg*1/r1];
-	%x = A\b;
+	%A=[2*r1+r2/2 -r2/2 -r2/2; -r2/2+r3/2+rt/2 r2+r3+rt/2 r2+r3+rt; -rt/2 -rt/2 -rt/2+2*r4];
+	%%%A = [(1/r1+1/r2+1/r3) -1/r3 -1/r2; 1/r3 (1/r3+1/rt(i)+1/(2*r4)) (-1/rt(i)-1/(2*r4)); 1/r1 0 1/r1];
+	%b = [vg; 0; 0];
+	%x = A\b
 	ig(i) = vg/rtot;
+	%ig(i) = x(1)
 	
 end 
 
-plot(rt,ig);
+plot(rv,ig);
 ylabel('Current i (amps)');
 xlabel('Resistance resistor Rt \Omega');
 title('current through power supply as a function of resistor Rt');
