@@ -10,10 +10,8 @@ L = .1;
 m = .1; % kg
 d = .1; % m
 g = 9.81; % m/s^2
-
 y0 = (m*g)/(k1);
 y = y0;
-
 x0 = 0;
 x = [x0,y0];
 xa = x;
@@ -21,12 +19,8 @@ xa = x;
 xp(:,1) = x(1);
 yp(:,1) = x(2); % Record initial guess for plotting
 a = [k1 k2 L d m g];
-
 %* Loop over desired number of steps 
    % Number of iterations before stopping
-
-
-
 %for i=1:length(k2)
 
 nStep = 20;
