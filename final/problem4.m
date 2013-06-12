@@ -14,7 +14,6 @@ istep = length(rv);
 
 
 for i=1:istep
-
 	rt = rv(i);
 	%% solved with equivelant resistance %%
 	%if 0

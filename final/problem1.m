@@ -10,7 +10,7 @@ m = .1; % kg
 d = .1; % m
 g = 9.81; % m/s^2
 
-y0 = (m*g)/(-k1);
+y0 = (m*g)/(k1);
 y = y0;
 
 x0 = 0;
@@ -29,7 +29,7 @@ for iStep=1:nStep
   %* Evaluate function f and its Jacobian matrix D
   [f D] = fnewtp1(xa,a);      % fnewtp1 returns value of f and D
   %* Find dx by Gaussian elimination
-  dx = f/D 
+  dx = f/D; 
   %* Update the estimate for the root
   fprintf('x,y = %g , %g\n',xa(1), xa(2)); 
   xa = xa - dx;              % Newton iteration for new x
@@ -38,12 +38,6 @@ for iStep=1:nStep
   if ( abs(dx(1)) < 1e-6 & abs(dx(2)) < 1e-6 )
   	break;
   end
-
-  	% (xp(:,iStep-1)-xp(:,iStep))
-  	% (yp(:,iStep-1)-yp(:,iStep))
-  	% if ((xp(:,iStep-1)-xp(:,iStep) > 1e-6) && ((yp(:,iStep-1)-yp(:,iStep)) > 1e-6))
-  	%	break;
-  	% end
 end
 
 %* Print the final estimate for the root
