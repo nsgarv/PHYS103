@@ -35,8 +35,10 @@ for i=1:istep
 	
 end 
 
+clf;
 plot(rv,ig);
 ylabel('Current i (amps)');
 xlabel('Resistance resistor Rt \Omega');
 title('current through power supply as a function of resistor Rt');
+legend('Current through source');
 
